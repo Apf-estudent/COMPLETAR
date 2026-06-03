@@ -14,17 +14,20 @@ from django.shortcuts import render
 from matplotlib.style import context
 from .models import *
 
+from django.shortcuts import render, redirect, get_object_or_404
+from django.http import HttpResponse, JsonResponse, HttpResponseRedirect
+from django.urls import reverse
+# Importamos todos tus modelos explícitamente para evitar errores
+from .models import Deposito, Supervisor, Medicamento, Hueco  
 
 # Create your views here.
 def inicio(request):
     return render(request, "pagina_base/inicio.html")
 
 
-# funciones para deposito
-def lista_deposito(request):
-    Deposito
-
-
+# ==========================================
+# FUNCIONES PARA DEPÓSITO
+# ==========================================
 def lista_deposito(request):
     depositos = Deposito.objects.all()
     return render(request, "lista_deposito.html", {"depositos": depositos})
@@ -33,65 +36,68 @@ def lista_deposito(request):
 def alta_deposito(request):
     if request.method == "POST":
         descripcion = request.POST.get("descripcion")
-        if descripcion:  # Validación básica
+        if descripcion:
             deposito = Deposito(descripcion=descripcion)
             deposito.save()
-        return redirect("lista_deposito")  # Redirige a la vista que lista depósitos
+        return redirect("lista_deposito")
 
-    # Si es GET, mostramos la lista de depósitos
     depositos = Deposito.objects.all()
     return render(request, "alta_deposito.html", {"depositos": depositos})
 
 
 def eliminacion_deposito(request, id_deposito):
-    deposito = Deposito.objects.get(id_deposito=id_deposito)
-
+    deposito = get_object_or_404(Deposito, id_deposito=id_deposito)
     if request.method == "POST":
         deposito.delete()
         return redirect("lista_deposito")
-
     return render(request, "elimina_deposito.html", {"deposito": deposito})
 
 
 def modificaciones_deposito(request, id_deposito):
-    deposito = Deposito.objects.get(id_deposito=id_deposito)
-
+    deposito = get_object_or_404(Deposito, id_deposito=id_deposito)
     if request.method == "POST":
         descripcion = request.POST.get("descripcion")
         if descripcion:
             deposito.descripcion = descripcion
             deposito.save()
         return redirect("lista_deposito")
-
     return render(request, "modificacion_deposito.html", {"deposito": deposito})
 
 
-# Funciones para hueco
+# ==========================================
+# FUNCIONES PARA HUECO
+# ==========================================
 def lista_hueco(request):
     huecos = Hueco.objects.all()
     return render(request, "lista_hueco.html", {"huecos": huecos})
 
 
 def alta_hueco(request):
-    pass
+    # Aquí irá tu lógica para crear un hueco más adelante
+    return render(request, "alta_hueco.html")
 
 
 def eliminacion_hueco(request, id_hueco):
-    pass
+    hueco = get_object_or_404(Hueco, id_hueco=id_hueco)
+    hueco.delete()
+    return redirect('lista_hueco')
 
 
 def modificaciones_hueco(request, id_hueco):
-    pass
+    hueco = get_object_or_404(Hueco, id_hueco=id_hueco)
+    return render(request, "modificaciones_hueco.html", {"hueco": hueco})
 
 
-# funciones para Supervisor
+# ==========================================
+# FUNCIONES PARA SUPERVISOR
+# ==========================================
 def lista_supervisor(request):
     supervisores = Supervisor.objects.all()
     return render(request, "lista_supervisor.html", {"supervisores": supervisores})
 
 
 def alta_supervisor(request):
-    pass
+    return render(request, "alta_supervisor.html")
 
 
 def eliminacion_supervisor(request, id_supervisor):
@@ -99,4 +105,24 @@ def eliminacion_supervisor(request, id_supervisor):
 
 
 def modificacion_supervisor(request, id_supervisor):
+    pass
+
+
+# ==========================================
+# FUNCIONES PARA MEDICAMENTO
+# ==========================================
+def lista_medicamento(request):
+    medicamento = Medicamento.objects.all()
+    return render(request, "lista_medicamento.html", {"medicamento": medicamento})
+
+
+def alta_medicamento(request):
+    return render(request, "alta_medicamento.html")
+
+
+def eliminacion_medicamento(request, id_medicamento):
+    pass
+
+
+def modificaciones_medicamento(request, id_medicamento):
     pass

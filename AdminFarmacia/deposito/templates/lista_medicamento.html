@@ -1,0 +1,51 @@
+{% extends 'pagina_base/base.html' %}
+{% load static %}
+{% block titulo %}Lista de Medicamentos{% endblock titulo %}
+{% block contenido %}
+<div class="container-fluid my-4">
+    <h1 class="text-white mb-4">Lista de Medicamentos</h1>
+    
+    <div class="table-responsive tabla-contenedor-blanco p-3 rounded shadow">
+        <table class="table table-hover align-middle mb-0">
+            <thead>
+                <tr>
+                    <th class="text-nowrap">Código Medicamento</th>
+                    <th class="text-nowrap">Nombre</th>
+                    <th class="text-nowrap">Laboratorio</th>
+                    <th>Lote</th>
+                    <th class="text-nowrap">Fecha de Vencimiento</th>
+                    <th class="text-nowrap">Fecha de Ingreso</th>
+                    <th>Depósito</th>
+                    <th class="text-nowrap">Fecha de Dispensa</th>
+                    <th>QR</th>
+                    <th class="text-nowrap">Código de Barra</th>
+                    <th>Estado</th>
+                    <th>Refrigeración</th>
+                    <th class="text-nowrap">Nivel de Riesgo</th>
+                    <th class="text-nowrap">Cantidad en Stock</th>
+                </tr>
+            </thead>
+            <tbody class="table-group-divider">
+                {% for medicamento in medicamentos %}
+                <tr>
+                    <td>{{ medicamento.codigo_medicamento }}</td>
+                    <td class="text-nowrap"><strong>{{ medicamento.nombre }}</strong></td>
+                    <td>{{ medicamento.laboratorio }}</td>
+                    <td>{{ medicamento.lote }}</td>
+                    <td>{{ medicamento.fecha_vencimiento }}</td>
+                    <td>{{ medicamento.fecha_ingreso }}</td>
+                    <td>{{ medicamento.deposito }}</td>
+                    <td>{{ medicamento.fecha_dispensa }}</td>
+                    <td>{{ medicamento.qr }}</td>
+                    <td>{{ medicamento.codigo_barra }}</td>
+                    <td>{{ medicamento.estado }}</td>
+                    <td>{{ medicamento.refrigeracion }}</td>
+                    <td>{{ medicamento.nivel_riesgo }}</td>
+                    <td>{{ medicamento.cantidad_stock }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock contenido %}

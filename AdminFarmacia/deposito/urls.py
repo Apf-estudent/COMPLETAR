@@ -11,13 +11,20 @@ urlpatterns = [
     path('deposito/alta_deposito/',views.alta_deposito,name='alta_deposito'),
     path('deposito/eliminacion_deposito/<int:id_deposito>/',views.eliminacion_deposito,name='eliminacion_deposito'),
     path('deposito/modificaciones_deposito/<int:id_deposito>/',views.modificaciones_deposito,name='modificaciones_deposito'),
+    
     path('deposito/lista_hueco/',views.lista_hueco, name='lista_hueco'),
     path('deposito/alta_hueco/',views.alta_hueco, name='alta_hueco'),
     path('eliminacion_hueco/<int:id_hueco>',views.eliminacion_hueco, name='eliminacion_hueco'),
     path('modificaciones_hueco/<int:id_hueco>',views.modificaciones_hueco, name='modificaciones_hueco'),
+    
     path('lista_supervisor/',views.lista_supervisor, name='lista_supervisor'),
     path('alta_supervisor/',views.alta_supervisor, name='alta_supervisor'),
     path('eliminacion_supervisor/<int:id_supervisor>',views.eliminacion_supervisor, name='eliminacion_supervisor'),
     path('modificacion_supervisor/<int:id_supervisor>',views.modificacion_supervisor, name='modificacion_supervisor'),
+
+    path('deposito/lista_medicamento/', views.lista_medicamento, name='lista_medicamento'),
+    path('deposito/alta_medicamento/', views.alta_medicamento, name='alta_medicamento'),
+    path('eliminacion_medicamento/<int:id_medicamento>/', views.eliminacion_medicamento, name='eliminacion_medicamento'),
+    path('modificaciones_medicamento/<int:id_medicamento>/', views.modificaciones_medicamento, name='modificaciones_medicamento'),
     
 ]+ static(settings.MEDIA_URL,document_root=settings.MEDIA_ROOT)
